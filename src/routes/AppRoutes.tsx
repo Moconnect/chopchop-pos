@@ -1,15 +1,41 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+
+import DashboardLayout from '../layouts/DashboardLayout'
+import Dashboard from '../pages/Dashboard/Dashboard'
+import NewOrder from '../pages/Order/NewOrder'
+import Orders from '../pages/Order/Orders'
+import Menu from '../pages/Menu/Menu'
 
 function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<div>Home</div>} />
-        <Route path="/login" element={<div>Login</div>} />
-        <Route path="/dashboard" element={<div>Dashboard</div>} />
-        <Route path="/orders" element={<div>Orders</div>} />
-        <Route path="/orders/new" element={<div>New Order</div>} />
-        <Route path="/menu" element={<div>Menu</div>} />
+        <Route
+          path="/"
+          element={<Navigate to="/dashboard" replace />}
+        />
+
+        <Route element={<DashboardLayout />}>
+          <Route
+            path="/dashboard"
+            element={<Dashboard />}
+          />
+
+          <Route
+            path="/orders/new"
+            element={<NewOrder />}
+          />
+
+          <Route
+            path="/orders"
+            element={<Orders />}
+          />
+
+          <Route
+            path="/menu"
+            element={<Menu />}
+          />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
