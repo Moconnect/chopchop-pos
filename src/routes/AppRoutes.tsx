@@ -5,7 +5,7 @@ import Dashboard from '../pages/Dashboard/Dashboard'
 import NewOrder from '../pages/Order/NewOrder'
 import Orders from '../pages/Order/Orders'
 import Menu from '../pages/Menu/Menu'
-
+import Payment from '../pages/Payment/Payment'
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -34,6 +34,11 @@ function AppRoutes() {
           <Route
             path="/menu"
             element={<Menu />}
+          />
+
+          <Route
+            path="/payment"
+            element={<Payment />}
           />
         </Route>
       </Routes>

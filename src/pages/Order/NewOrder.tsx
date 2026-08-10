@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { products } from '../../data/products'
 import type { OrderItem } from '../../types/order'
 import OrderItemComponent from '../../components/orders/OrderItem'
@@ -7,6 +8,9 @@ import OrderSummary from '../../components/orders/OrderSummary'
 function NewOrder() {
   const [orderItems, setOrderItems] = useState<OrderItem[]>([])
   const [search, setSearch] = useState('')
+
+  const navigate = useNavigate()
+
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) =>
@@ -98,13 +102,17 @@ function NewOrder() {
   const total = subtotal + tax
 
   const handleContinueToPayment = () => {
-    console.log('Continue to payment', {
+  if (orderItems.length === 0) return
+
+  navigate('/payment', {
+    state: {
       items: orderItems,
       subtotal,
       tax,
       total,
-    })
-  }
+    },
+  })
+}
 
   return (
     <div className="space-y-6">
